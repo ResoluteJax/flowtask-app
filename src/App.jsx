@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Minha Lista de Tarefas</h1>
+      <h1>💻 FlowTask: Gerenciador de Tarefas Interativo 🎯</h1>
 
       <form onSubmit={handleAddTask} className="task-form">
         <input

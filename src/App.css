@@ -5,13 +5,14 @@ body{
   padding: 20px;
   display: flex;
   justify-content: center;
+  
 }
 
 .app-container {
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(238, 238, 238);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0,02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 500px;
 }
@@ -19,8 +20,9 @@ body{
 h1 {
   display: flex;
   text-align: center;
-  color: #343a40;
+  color: #333333;
   margin-bottom: 20px;
+  font-size: 35px;
 }
 
 .task-form{
@@ -29,14 +31,14 @@ margin-bottom: 20px;
 }
 
 .task-form input{
-  background-color: #b8b8b8;
+  background-color: #e2e2e2;
 }
 
 
 .task-form input[type="text"] {
 flex-grow: 1;
 padding: 10px;
-border: 1px solid #dacece;
+border: 1px solid #cfcfcf;
 border-radius: 4px 0 0 4px;
 color: #000000;
 font-size: 1rem;

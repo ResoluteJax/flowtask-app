@@ -1,0 +1,141 @@
+body{
+  font-family: sans-serif;
+  background-color: #f8f9fa; /* TALVEZ UM PAPEL DE PAREDE? */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  background-color: rgb(233, 233, 233);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0,02);
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  display: flex;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.task-form{
+display: flex;
+margin-bottom: 20px;
+}
+
+.task-form input{
+  background-color: #b8b8b8;
+}
+
+
+.task-form input[type="text"] {
+flex-grow: 1;
+padding: 10px;
+border: 1px solid #dacece;
+border-radius: 4px 0 0 4px;
+color: #000000;
+font-size: 1rem;
+}
+
+.task-form input[type="text"]::placeholder {
+  color: #495057;  
+}
+
+.task-form button{
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+  
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 15px;
+}
+
+.task-form button:hover {
+  background-color: #0056b3;
+}
+
+.task-list {
+  margin: 0 0 0 0;
+  padding-left: 0;
+
+}
+
+.task-list li::marker{
+  color: #495057;
+  font-weight: bold;
+}
+
+.task-list li{
+  background-color: #ffc40059;
+  border: 1px solid #b8b8b8;
+  margin-bottom: 5px;
+  padding: 10px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.task-list li span{
+  color: #531f1f;
+  cursor: pointer;
+  flex-grow: 1;
+  margin-right: 10px;
+  overflow-wrap: break-word; /* Para quebrar palavras longas */
+  word-break: break-word; /* Garante a quebra */
+}
+
+.task-list li.completed{
+  background-color: #99cf928b;
+  text-decoration: line-through;
+}
+
+
+.list-item-content{/*Botão ICONES EXCLUIR*/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+
+.task-list li.completed span{
+  text-decoration: line-through;
+  color: #34ab24;
+}
+
+.remove-btn{
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  line-height: 1;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
+
+.task-form button svg,
+.remove-btn svg{
+  vertical-align: middle;/* forma alternativa ajuda a alinhar o svg */
+}
+
+p{
+  color: #6c757d;
+}
+

@@ -80,7 +80,7 @@ font-size: 1rem;
 }
 
 .task-list li{
-  background-color: #ffc40059;
+  background-color: #ffbb9a;
   border: 1px solid #b8b8b8;
   margin-bottom: 5px;
   padding: 10px 10px;
@@ -141,3 +141,154 @@ p{
   color: #6c757d;
 }
 
+/* ========================== */
+/* Estilos do Gráfico         */
+/* ========================== */
+
+.chart-container{
+  width: 90%;
+  max-width: 400px;
+  margin: 40px auto 20px auto;
+
+}
+
+.chart-container h2{
+  text-align: center;
+  margin-bottom: 20px;
+  color: #495057;
+  font-size: 1.3rem;
+}
+
+.recharts-pie-label-text{
+  font-size: 0.8rem;
+  fill: #333;
+}
+
+/* Fim dos Estilos do Gráfico */
+
+/* ========================== */
+/* Estilos do Redapé */
+/* ========================== */
+
+.app-footer{
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #c0392b;
+  
+}
+
+.app-footer p{
+  margin-bottom: 15px;
+
+}
+
+.social-links a{
+  color: #343a40;
+  font-size: 1.4rem;
+  margin: 0 12px;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.social-links a span{
+ font-size: 0.8rem;
+ color: #495057;
+}
+
+.social-links a:hover{
+  color: #007bff;
+}
+
+/* Fim dos Estilos do Redapé */
+
+/* ========================== */
+/* Estilos Responsivos (Mobile) */
+/* ========================== */
+
+@media (max-width: 600px) {
+
+  body{
+    padding: 10px;
+  }
+
+  .app-container {
+    padding: 0%;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .task-form{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .task-form input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .task-form button {
+    width: 100%;
+    border-radius: 4px;
+    
+    
+    justify-content: center;
+  }
+
+  .task-list {
+    padding-left: 30px;
+  }
+
+  .list-item-content{
+    padding: 8px 10px;
+  }
+
+  .list-item-content span{
+   word-break: break-word;
+   margin-right: 8px;
+  }
+
+  .remove-btn{
+    padding: 8px 10px;
+    font-size: 1.0rem;
+  }
+
+  .app-footer{
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 0.85rem;
+  }
+
+  .social-links a{
+    font-size: 1.3rem;
+    margin: 0 10px;
+  }
+
+  .social-links a span{
+    font-size: 0.75rem;
+  }
+
+  .charts-container{
+    width: 100%;
+    margin: 30px;
+  }
+
+  .charts-container h2{
+    font-size: 1.2rem;
+  }
+} /*Fim do @media (max-width: 600px) */

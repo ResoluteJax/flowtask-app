@@ -1,7 +1,9 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 // Importar os ícones desejados do react-icons (neste caso, do set Font Awesome 'fa')
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+// Importar componentes Recharts
+import{PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import './App.css'; // Seus estilos
 
 function App() {
@@ -47,9 +49,55 @@ function App() {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
 
+ // --- Calcular dados para o gráfico ---
+ const completedTasks = tasks.filter(task => task.completed).length;
+ const pendingTasks = tasks.length - completedTasks;
+
+ // Formato de dados que Recharts PieChart espera: array de objetos
+ const chartData = [
+   { name: 'Concluídas', value: completedTasks },
+   { name: 'Pendentes', value: pendingTasks },
+ ];
+
+ // Cores para as fatias do gráfico
+ const COLORS = ['#34ab24', '#FF8042']; // Verde para concluídas, Laranja para pendentes
+
+
+
   return (
+    
     <div className="app-container">
       <h1>💻 FlowTask: Gerenciador de Tarefas Interativo 🎯</h1>
+
+{/* ========== INÍCIO DA SEÇÃO DO GRÁFICO ========== */}
+{tasks.length > 0 && ( // Só mostra o gráfico se houver tarefas
+        <div className="chart-container">
+          <h2>Progresso das Tarefas</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={chartData}
+                cx="50%" // Posição horizontal do centro
+                cy="50%" // Posição vertical do centro
+                outerRadius={80} // Raio externo da pizza
+                fill="#8884d8" // Cor padrão (será sobrescrita pelas Cells)
+                dataKey="value" // Chave do objeto de dados que contém o valor numérico
+                nameKey="name" // Chave do objeto de dados que contém o nome da fatia
+                labelLine={false} // Não mostrar linhas para labels externos
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} // Customiza o label na fatia
+              >
+                {/* Mapeia os dados para aplicar cores diferentes a cada fatia (Cell) */}
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value, name) => [`${value} tarefas`, name]} /> {/* Tooltip ao passar o mouse */}
+              {/* <Legend /> */} {/* Descomente se quiser uma legenda separada */}
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+      {/* ========== FIM DA SEÇÃO DO GRÁFICO ========== */}
 
       <form onSubmit={handleAddTask} className="task-form">
         <input
@@ -87,8 +135,45 @@ function App() {
         ))}
       </ol>
        {tasks.length === 0 && <p>Nenhuma tarefa na lista!</p>}
-    </div>
+    
+
+
+{/* inicio do rodapé */}
+<footer className='app-footer'>
+<p>
+  © {new Date().getFullYear()} Flowtask by Otávio Henrique
+</p>
+<div className="social-links">
+<a href="mailto:otavio-henrique10@hotmail.com" 
+aria-label="Enviar email para Otávio Henrique">
+
+<FaEnvelope/>
+<span>Email</span>
+</a>
+
+<a href="https://github.com/ResoluteJax"
+target='_blank'
+rel="noopener noreferrer"
+aria-label='Github de Otávio Henrique'>
+
+  <FaGithub/>
+  <span>GitHub</span>
+</a>
+
+<a href="https://www.linkedin.com/in/otavio-henrique-filgueiras-dos-santos-2746a120a/"
+target='_blank'
+rel="noopener noreferrer"
+aria-label='Perfil no Linkedin de Otávio Henrique'>
+  <FaLinkedin/>
+  <span>Linkedin</span>
+</a>
+</div>
+</footer>
+</div>
   );
 }
+{/* fim do rodapé */}
+
+
 
 export default App;

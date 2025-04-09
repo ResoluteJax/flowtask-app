@@ -6,6 +6,7 @@ import { FaPlus, FaTrashAlt, FaEnvelope, FaGithub, FaLinkedin } from 'react-icon
 import{PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import './App.css'; // Seus estilos
 
+
 function App() {
   const [tasks, setTasks] = useState(() => {
     const storedTasks = localStorage.getItem('tasks');
@@ -16,8 +17,9 @@ function App() {
       return [];
     }
   });
-
   const [inputValue, setInputValue] = useState('');
+  const [activityLog, setActivityLog] = useState([]); 
+  const MAX_LOG_ENTRIES = 2; // Número máximo de entradas no log
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -25,29 +27,90 @@ function App() {
 
   const handleAddTask = (event) => {
     event.preventDefault();
-    if (inputValue.trim() === '') return;
-
+    const trimmedValue = inputValue.trim();
+    if (trimmedValue === '') return;
     const newTask = {
       id: Date.now(),
-      text: inputValue,
+      text: trimmedValue,
       completed: false,
     };
 
-    setTasks([...tasks, newTask]);
+  setTasks(prevTasks => [...prevTasks, newTask]);
+
+  // Adiciona a nova tarefa ao log de atividades
+   const logMessage = `Você adicionou a tarefa: "${trimmedValue}"`;
+   const newLogEntry ={id: Date.now(), message: logMessage, timestamp: new Date()};
+
+  setActivityLog(prevLog => [newLogEntry, ...prevLog].slice(0, MAX_LOG_ENTRIES));
+
+// -- Inicia o timer para remover o log --
+const entryIdToRemove = newLogEntry.id;
+setTimeout(() => {
+  setActivityLog(currentLog => currentLog.filter(entry => entry.id !== entryIdToRemove));
+}, 1000); // 1 segundos
+
+
     setInputValue('');
   };
 
   const handleToggleComplete = (taskId) => {
-    setTasks(
-      tasks.map(task =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
-      )
+    let taskText = '';
+    let isNowCompleted;
+  
+    setTasks(prevTasks =>
+      prevTasks.map(task => {
+        if (task.id === taskId) {
+          taskText = task.text;
+          isNowCompleted = !task.completed;
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      })
     );
-  };
+  
+    // Adiciona a nova tarefa ao log de atividades E inicia o timer DENTRO do IF
+    if (taskText !== '') { // <--- INÍCIO DO IF
+      const actionText = isNowCompleted ? 'completou' : 'marcou como pendente';
+      const logMessage = `Você ${actionText} a tarefa: "${taskText}"`;
+      const newLogEntry = { id: Date.now(), message: logMessage, timestamp: new Date() }; // newLogEntry definida aqui dentro
+  
+      setActivityLog(prevLog => [newLogEntry, ...prevLog].slice(0, MAX_LOG_ENTRIES)); // Adiciona ao log
+  
+      // -- Timer movido para DENTRO do IF --
+      const entryIdToRemove = newLogEntry.id; // Agora acessa newLogEntry corretamente
+      setTimeout(() => {
+        setActivityLog(currentLog => currentLog.filter(entry => entry.id !== entryIdToRemove));
+      }, 7000); // 1 segundo (ajuste se quiser mais tempo)
+      // -- Fim do Timer --
+  
+    } // <--- FIM DO IF
+  }; // Fim da função handleToggleComplete
 
   const handleRemoveTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
-  };
+    let removedTaskText = '';
+    const taskToRemove = tasks.find(task => task.id === taskId);
+    if (taskToRemove) {
+      removedTaskText = taskToRemove.text;
+    }
+  
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId)); // Remove a tarefa
+  
+    // Adiciona ao log E inicia o timer DENTRO do IF
+    if (removedTaskText !== '') { // <--- INÍCIO DO IF
+      const logMessage = `Você removeu a tarefa: "${removedTaskText}"`;
+      const newLogEntry = { id: Date.now(), message: logMessage, timestamp: new Date() }; // newLogEntry definida aqui dentro
+  
+      setActivityLog(prevLog => [newLogEntry, ...prevLog].slice(0, MAX_LOG_ENTRIES)); // Adiciona ao log
+  
+      // -- Timer movido para DENTRO do IF --
+      const entryIdToRemove = newLogEntry.id; // Agora acessa newLogEntry corretamente
+      setTimeout(() => {
+        setActivityLog(currentLog => currentLog.filter(entry => entry.id !== entryIdToRemove));
+      }, 7000); // 7 segundo (ajuste se quiser mais tempo)
+      // -- Fim do Timer --
+  
+    } // <--- FIM DO IF
+  }; // Fim da função handleRemoveTask
 
  // --- Calcular dados para o gráfico ---
  const completedTasks = tasks.filter(task => task.completed).length;
@@ -136,7 +199,22 @@ function App() {
       </ol>
        {tasks.length === 0 && <p>Nenhuma tarefa na lista!</p>}
     
-
+ {/* ========== INÍCIO DO FEED DE ATIVIDADE ========== */}
+ {activityLog.length > 0 && ( // Só renderiza o container se houver pelo menos uma entrada no log
+      <div className="activity-feed">
+        <h3>Atividade Recente</h3> {/* Título do Feed */}
+        <ul>
+          {/* Mapeia cada entrada do log para um item de lista */}
+          {activityLog.map(entry => (
+            <li key={entry.id} className="log-entry"> {/* Usa o ID da entrada como chave */}
+              <span>{entry.message}</span> {/* Exibe a mensagem da entrada */}
+              
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    {/* ========== FIM DO FEED DE ATIVIDADE ========== */}
 
 {/* inicio do rodapé */}
 <footer className='app-footer'>

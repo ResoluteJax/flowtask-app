@@ -47,7 +47,7 @@ function App() {
 const entryIdToRemove = newLogEntry.id;
 setTimeout(() => {
   setActivityLog(currentLog => currentLog.filter(entry => entry.id !== entryIdToRemove));
-}, 1000); // 1 segundos
+}, 7000); // 7 segundos
 
 
     setInputValue('');

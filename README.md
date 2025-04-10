@@ -14,5 +14,6 @@ Funcionalidades Implementadas:
   Objetivo: 🎓 Criar uma aplicação funcional e agradável, aplicando boas práticas de React (Hooks useState, useEffect) e CSS.
   Próximos Passos: ➡️ Implementação de filtros, edição de tarefas, e integração com API REST!
 
+  🔗 Link da Página Ao vivo: https://resolutejax.github.io/flowtask-app/
   ✅ Preview: 
   ![432526537-474d4b05-06be-4c91-82b5-a589461604d3](https://github.com/user-attachments/assets/89d361e3-51b7-4abe-81ef-922115fe70a1)

@@ -16,8 +16,7 @@ Funcionalidades Implementadas:
 
   🔗 Link da Página Ao vivo: https://resolutejax.github.io/flowtask-app/
   
-  ✅ Preview: 
-  
-![432526537-474d4b05-06be-4c91-82b5-a589461604d3](https://github.com/user-attachments/assets/89d361e3-51b7-4abe-81ef-922115fe70a1)
-
-![image](https://github.com/user-attachments/assets/0e27d763-ce51-4d88-9877-9428b05681cf)
+  ✅ Preview das páginas: 
+![Capturar](https://github.com/user-attachments/assets/7cba0680-f246-4564-b37c-cd056738a52b)
+![432529268-0e27d763-ce51-4d88-9877-9428b05681cf](https://github.com/user-attachments/assets/a9bd3574-49ec-4f6e-9f67-c110362ac31d)
+![tumbnail flow](https://github.com/user-attachments/assets/601d97a0-af72-49f9-afc6-fd90834c195a)
